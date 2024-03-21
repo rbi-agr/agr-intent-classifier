@@ -4,6 +4,6 @@ services:
   intent-classifier:
     build: .
     ports:
-      - "8000:8000"
+      - "9001:9001"
     volumes:
       - .:/app 
