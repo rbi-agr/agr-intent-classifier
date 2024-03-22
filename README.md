@@ -50,9 +50,17 @@ This command starts the API service in the background, mapping the container's p
 	python api.py
 ```
 - **Using the API:**
-
-	The API expects a POST request to the `/` endpoint with the following JSON data containing the complaint text:
+	curl request 
 ```
+curl --location 'http://0.0.0.0:9001/classify' \
+--header 'Content-Type: application/json' \
+--data '{
+    "text": "bank excess charges occured"
+}'
+```
+	The API expects a POST request to the `/classify` endpoint with the following JSON data containing the complaint text:
+```
+
 	{
 	  "text": "This is a complaint about late fees."
 	}
