@@ -2,7 +2,7 @@ from collections import Counter, defaultdict
 
 def create_keyword_mapping():
     usecase_keywords = [
-       ("Cheque book", [
+       ("CHEQUE_BOOK", [
            "Cheque", "Check", "Cheque book", "Check book", "book",
            "Cheque leaf", "Cheque leaves", "Cheque delivery", "Check delivery",
            "Status of cheque book", "Cheque status", "Check status",
@@ -29,7 +29,7 @@ def create_keyword_mapping():
            "RTGS delay", "RTGS cutoff", "RTGS time", "RTGS processing",
            "RTGS receipt"
        ]),
-       ("Loan enquiry", [
+       ("LOAN_ENQUIRY", [
            "Loan", "Balance", "account", "Outstanding balance", "Balance enquiry",
            "Balance status", "Loan Amount outstanding", "Loan amount",
            "Loan balance transaction", "Loan payment", "Loan interest",
@@ -43,7 +43,7 @@ def create_keyword_mapping():
 
     keyword_mapping = defaultdict(list)
     for usecase, keywords in usecase_keywords:
-        if usecase in ["Cheque book", "NEFT", "RTGS", "Loan enquiry"]:
+        if usecase in ["CHEQUE_BOOK", "NEFT", "RTGS", "LOAN_ENQUIRY"]:
             for keyword in keywords:
                 keyword_mapping[keyword].append(usecase)
     return keyword_mapping
@@ -59,9 +59,6 @@ def calculate_probabilities_usecase(query):
                 usecase_counts[usecase] += 1
     if usecase_counts:
         max_probability_usecase = max(usecase_counts, key=usecase_counts.get)
-        return max_probability_usecase
+        return { "useCase": max_probability_usecase }
     else:
-        return 'other'
-
-query = "want to know balance of my loan account"
-print(calculate_probabilities_usecase(query))
+        return { "useCase": 'Other' }

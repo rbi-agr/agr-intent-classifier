@@ -17,14 +17,6 @@ async def startup():
     global model
     model = Model(app)
 
-def score_to_category(score):
-    if score > 0.33:
-        return "Positive"
-    elif score < -0.33:
-        return "Negative"
-    else:
-        return "Neutral"
-
 @app.route('/sentiment-analysis', methods=['POST'])
 async def sentiment_label():
     data = await request.get_json()
@@ -32,6 +24,7 @@ async def sentiment_label():
     classifier.predict(sentence)
     sentiment_label = sentence.labels[0].value
     sentiment_score = sentence.labels[0].score
+    response = {}
     response['sentiment_label'] = sentiment_label
     response['sentiment_score'] = sentiment_score
     return response
@@ -68,7 +61,6 @@ async def embed():
     }
 
     return category_map[label]
-
 
 if __name__ == "__main__":
     app.run()
