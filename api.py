@@ -2,33 +2,17 @@ from model import Model
 from request import ModelRequest
 from quart import Quart, request
 import aiohttp
-from flair.models import TextClassifier
-from flair.data import Sentence
 from rule import calculate_probabilities_usecase
 
 app = Quart(__name__)
 
 model = None
-classifier = TextClassifier.load('./nlp_models/sentiment-en-mix-distillbert_4.pt')
 
 @app.before_serving
 async def startup():
     app.client = aiohttp.ClientSession()
     global model
     model = Model(app)
-
-@app.route('/sentiment-analysis', methods=['POST'])
-async def sentiment_label():
-    data = await request.get_json()
-    sentence = Sentence(data['text'])
-    classifier.predict(sentence)
-    sentiment_label = sentence.labels[0].value
-    sentiment_score = sentence.labels[0].score
-    response = {}
-    response['sentiment_label'] = sentiment_label
-    response['sentiment_score'] = sentiment_score
-    return response
-
 
 @app.route('/rule-engine', methods=['POST'])
 async def rule_engine_label():

@@ -13,6 +13,7 @@ class Model():
         cls.model.to(cls.device)
         cls.threshold = 0.5
         return cls.instance
+
     async def inference(self,  request: ModelRequest):
         inputs = self.tokenizer(request.text, return_tensors="pt")
         inputs = {key: value.to(self.device) for key, value in inputs.items()}
