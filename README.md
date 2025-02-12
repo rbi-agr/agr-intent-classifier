@@ -75,6 +75,8 @@ The API will respond with JSON indicating the predicted category and subcategory
 	}
 ```
 
+Testing GHA
+
 - **Using cURL**
 ```
 	curl -X POST http://localhost:8000/ -H "Content-Type: application/json" -d '{"text": "I'm having trouble transferring money to another bank."}'
