@@ -7,8 +7,8 @@ class Model():
         cls.context = context
         if not hasattr(cls, 'instance'):
             cls.instance = super(Model, cls).__new__(cls)
-        cls.tokenizer = AutoTokenizer.from_pretrained("./saved_tokenizers")
-        cls.model = AutoModelForSequenceClassification.from_pretrained("./saved_models")
+        cls.tokenizer = AutoTokenizer.from_pretrained("VidishaKhalpada/intent-classifier")
+        cls.model = AutoModelForSequenceClassification.from_pretrained("VidishaKhalpada/intent-classifier")
         cls.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         cls.model.to(cls.device)
         cls.threshold = 0.5
