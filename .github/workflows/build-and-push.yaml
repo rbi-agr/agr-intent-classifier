@@ -22,6 +22,9 @@ jobs:
 
       - name: Checkout code
         uses: actions/checkout@v2
+  
+      - name: Cleaning up the working environment
+        uses: rokibhasansagar/slimhub_actions@main
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
