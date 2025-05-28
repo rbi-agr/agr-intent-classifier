@@ -5,9 +5,9 @@ WORKDIR /app
 #install requirements
 
 COPY requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
+RUN sudo apt-get install pkg-config && sudo apt-get install sentencepiece && pip install sentencepiece && pip install --upgrade pip && pip3 install -r requirements.txt
 
-# Copy the rest of the application code to the working directory
+# Copy the rest of the application code to the working directory 
 COPY . /app/
 EXPOSE 9001
 
